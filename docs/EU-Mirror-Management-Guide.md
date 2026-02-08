@@ -96,6 +96,7 @@ Das `rate-mirrors` Tool unterstützt folgende relevante Optionen:
 |--------|-------------|
 | `--save=FILE` | Ausgabe in Datei speichern |
 | `--entry-country=CC` | Startland für Mirror-Suche (ISO-Code) |
+| `--include-countries=CC,CC` | Nur Mirrors aus diesen Ländern einbeziehen (kommagetrennt) |
 | `--exclude-countries=CC,CC` | Länder ausschließen (kommagetrennt) |
 | `--protocol=PROTO` | Nur bestimmtes Protokoll testen (http/https) |
 | `--max-delay=N` | Maximale Verzögerung in Sekunden |
@@ -105,16 +106,16 @@ Das `rate-mirrors` Tool unterstützt folgende relevante Optionen:
 
 ### 2.2 Optimierter Befehl für EU-Only
 
-Da `rate-mirrors` aktuell keinen direkten `--include-countries` Parameter hat, verwenden wir `--exclude-countries` um alle Nicht-EU-Länder auszuschließen:
+Um sicherzustellen, dass nur EU-Server verwendet werden, nutzen wir `--include-countries` um ausschließlich EU-Länder einzuschließen:
 
 ```bash
-# Wichtige Nicht-EU-Länder die häufig Mirrors haben
-NON_EU_COUNTRIES="US,CN,RU,BY,JP,KR,AU,BR,CA,IN,SG,TW,HK,UA,CH,NO,GB,IS,RS,MD,AL,MK,ME,BA,XK,TR"
+# Alle EU-Mitgliedstaaten
+EU_COUNTRIES="AT,BE,BG,HR,CY,CZ,DK,EE,FI,FR,DE,GR,HU,IE,IT,LV,LT,LU,NL,PL,PT,RO,SK,SI,ES,SE"
 
 # Optimierter Befehl
 rate-mirrors \
     --entry-country=DE \
-    --exclude-countries="${NON_EU_COUNTRIES}" \
+    --include-countries="${EU_COUNTRIES}" \
     --protocol=https \
     --max-delay=21600 \
     --concurrency=16 \
@@ -124,14 +125,14 @@ rate-mirrors \
 # Für CachyOS-Repositories
 rate-mirrors \
     --entry-country=DE \
-    --exclude-countries="${NON_EU_COUNTRIES}" \
+    --include-countries="${EU_COUNTRIES}" \
     --protocol=https \
     --max-delay=10000 \
     --allow-root \
     cachyos
 ```
 
-> **Hinweis:** Nach dem Brexit ist `GB` (Vereinigtes Königreich) kein EU-Mitglied mehr. Auch `CH` (Schweiz) und `NO` (Norwegen) gehören nicht zur EU.
+> **Hinweis:** Die Verwendung von `--include-countries` ist zuverlässiger als `--exclude-countries`, da nur explizit aufgeführte Länder einbezogen werden. Nach dem Brexit ist `GB` (Vereinigtes Königreich) kein EU-Mitglied mehr. Auch `CH` (Schweiz) und `NO` (Norwegen) gehören nicht zur EU.
 
 ---
 
