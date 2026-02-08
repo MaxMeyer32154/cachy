@@ -1,0 +1,78 @@
+# =============================================================================
+# CachyOS EU Mirror Rating Service
+# =============================================================================
+# Beschreibung: Aktualisiert die Mirror-Listen auf EU-only Server
+# Installation:
+#   sudo cp cachyos-rate-mirrors-eu.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable cachyos-rate-mirrors-eu.service
+#
+# Quellen:
+#   - https://wiki.archlinux.org/title/Systemd
+#   - https://github.com/CachyOS/CachyOS-PKGBUILDS
+# =============================================================================
+
+[Unit]
+Description=CachyOS EU Mirror Rating Service
+Documentation=https://wiki.cachyos.org
+Documentation=https://wiki.archlinux.org/title/Mirrors
+
+# Netzwerk muss verfügbar sein
+After=network-online.target
+Wants=network-online.target
+
+# Nur ausführen wenn das Skript existiert
+ConditionPathExists=/usr/local/bin/cachyos-rate-mirrors-eu
+
+[Service]
+Type=oneshot
+
+# Hauptbefehl
+ExecStart=/usr/local/bin/cachyos-rate-mirrors-eu
+
+# Timeout (10 Minuten sollten ausreichen)
+TimeoutStartSec=600
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=cachyos-rate-mirrors-eu
+
+# Neustart bei Fehler (optional, für oneshot normalerweise nicht nötig)
+# Restart=on-failure
+# RestartSec=60
+
+# ===========================
+# Sicherheitseinstellungen
+# ===========================
+
+# Dateisystem-Schutz
+ProtectSystem=full
+ProtectHome=read-only
+PrivateTmp=true
+
+# Netzwerk erlauben (benötigt für Mirror-Tests)
+PrivateNetwork=false
+
+# Kernel-Module laden verbieten
+ProtectKernelModules=true
+
+# Kernel-Tunables schützen
+ProtectKernelTunables=true
+
+# Control Groups schützen
+ProtectControlGroups=true
+
+# /proc und /sys einschränken
+ProtectProc=invisible
+ProcSubset=pid
+
+# Keine neuen Privilegien (muss false sein wegen rate-mirrors --allow-root)
+NoNewPrivileges=false
+
+# Ressourcen-Limits
+MemoryMax=512M
+CPUQuota=50%
+
+[Install]
+WantedBy=multi-user.target
