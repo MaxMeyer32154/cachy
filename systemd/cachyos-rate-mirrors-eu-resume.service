@@ -1,0 +1,55 @@
+# =============================================================================
+# CachyOS EU Mirror Rating Resume Service
+# =============================================================================
+# Beschreibung: Aktualisiert Mirror-Listen nach dem Aufwachen aus dem Ruhezustand
+# Installation:
+#   sudo cp cachyos-rate-mirrors-eu-resume.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable cachyos-rate-mirrors-eu-resume.service
+#
+# Quellen:
+#   - https://wiki.archlinux.org/title/Power_management#Sleep_hooks
+# =============================================================================
+
+[Unit]
+Description=Update CachyOS EU Mirrors after System Resume
+Documentation=https://wiki.archlinux.org/title/Power_management
+
+# Nach dem Aufwachen aus verschiedenen Schlafmodi ausführen
+After=suspend.target
+After=hibernate.target
+After=hybrid-sleep.target
+After=suspend-then-hibernate.target
+
+# Nur ausführen wenn das Skript existiert
+ConditionPathExists=/usr/local/bin/cachyos-rate-mirrors-eu
+
+[Service]
+Type=oneshot
+
+# 30 Sekunden warten bis Netzwerk verfügbar ist
+ExecStartPre=/usr/bin/sleep 30
+
+# Mirror-Update ausführen
+ExecStart=/usr/local/bin/cachyos-rate-mirrors-eu
+
+# Timeout
+TimeoutStartSec=600
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=cachyos-rate-mirrors-eu-resume
+
+# Sicherheitseinstellungen (wie im Haupt-Service)
+ProtectSystem=full
+ProtectHome=read-only
+PrivateTmp=true
+NoNewPrivileges=false
+
+[Install]
+# Bei allen Schlafmodi aktivieren
+WantedBy=suspend.target
+WantedBy=hibernate.target
+WantedBy=hybrid-sleep.target
+WantedBy=suspend-then-hibernate.target

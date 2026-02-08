@@ -1,0 +1,58 @@
+# =============================================================================
+# CachyOS EU Mirror Rating Timer
+# =============================================================================
+# Beschreibung: Timer für wöchentliche Aktualisierung der EU-Mirror-Listen
+# Installation:
+#   sudo cp cachyos-rate-mirrors-eu.timer /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now cachyos-rate-mirrors-eu.timer
+#
+# Timer-Status prüfen:
+#   systemctl list-timers cachyos-rate-mirrors-eu.timer
+#
+# Quellen:
+#   - https://wiki.archlinux.org/title/Systemd/Timers
+# =============================================================================
+
+[Unit]
+Description=Weekly CachyOS EU Mirror Rating Timer
+Documentation=https://wiki.archlinux.org/title/Systemd/Timers
+
+# Timer nicht starten wenn Batteriebetrieb (optional)
+# ConditionACPower=true
+
+[Timer]
+# =============================================================================
+# Timing-Optionen (wählen Sie eine aus)
+# =============================================================================
+
+# Option 1: Wöchentlich am Sonntag um 03:00 Uhr
+OnCalendar=Sun *-*-* 03:00:00
+
+# Option 2: Täglich um 04:00 Uhr (auskommentiert)
+# OnCalendar=*-*-* 04:00:00
+
+# Option 3: Alle 3 Tage (auskommentiert)
+# OnCalendar=*-*-1,4,7,10,13,16,19,22,25,28 03:00:00
+
+# Option 4: Nach dem Booten (zusätzlich zum Kalender)
+# OnBootSec=5min
+
+# =============================================================================
+# Timer-Verhalten
+# =============================================================================
+
+# Bei verpasster Ausführung (z.B. System war aus) nachholen
+Persistent=true
+
+# Zufällige Verzögerung um Server-Last zu verteilen (max 1 Stunde)
+RandomizedDelaySec=3600
+
+# Genauigkeit des Timers (niedriger = genauer, höher = energiesparender)
+AccuracySec=1h
+
+# Timer sofort starten wenn aktiviert (optional)
+# OnActiveSec=0
+
+[Install]
+WantedBy=timers.target
