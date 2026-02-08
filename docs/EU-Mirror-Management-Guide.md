@@ -74,7 +74,6 @@ IT  - Italien
 LV  - Lettland
 LT  - Litauen
 LU  - Luxemburg
-MT  - Malta
 NL  - Niederlande
 PL  - Polen
 PT  - Portugal

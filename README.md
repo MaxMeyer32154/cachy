@@ -90,15 +90,15 @@ Das Skript filtert auf folgende EU-Mitgliedstaaten (Stand 2024):
 |------|------|------|------|
 | AT | Österreich | LT | Litauen |
 | BE | Belgien | LU | Luxemburg |
-| BG | Bulgarien | MT | Malta |
-| HR | Kroatien | NL | Niederlande |
-| CY | Zypern | PL | Polen |
-| CZ | Tschechien | PT | Portugal |
-| DK | Dänemark | RO | Rumänien |
-| EE | Estland | SK | Slowakei |
-| FI | Finnland | SI | Slowenien |
-| FR | Frankreich | ES | Spanien |
-| DE | Deutschland | SE | Schweden |
+| BG | Bulgarien | NL | Niederlande |
+| HR | Kroatien | PL | Polen |
+| CY | Zypern | PT | Portugal |
+| CZ | Tschechien | RO | Rumänien |
+| DK | Dänemark | SK | Slowakei |
+| EE | Estland | SI | Slowenien |
+| FI | Finnland | ES | Spanien |
+| FR | Frankreich | SE | Schweden |
+| DE | Deutschland | | |
 | GR | Griechenland | | |
 | HU | Ungarn | | |
 | IE | Irland | | |
