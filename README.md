@@ -88,22 +88,19 @@ Das Skript filtert auf folgende EU-Mitgliedstaaten (Stand 2024):
 
 | Code | Land | Code | Land |
 |------|------|------|------|
-| AT | Österreich | LT | Litauen |
-| BE | Belgien | LU | Luxemburg |
-| BG | Bulgarien | MT | Malta |
-| HR | Kroatien | NL | Niederlande |
-| CY | Zypern | PL | Polen |
-| CZ | Tschechien | PT | Portugal |
-| DK | Dänemark | RO | Rumänien |
-| EE | Estland | SK | Slowakei |
-| FI | Finnland | SI | Slowenien |
-| FR | Frankreich | ES | Spanien |
-| DE | Deutschland | SE | Schweden |
-| GR | Griechenland | | |
-| HU | Ungarn | | |
-| IE | Irland | | |
-| IT | Italien | | |
-| LV | Lettland | | |
+| AT | Österreich | HU | Ungarn |
+| BE | Belgien | IE | Irland |
+| BG | Bulgarien | IT | Italien |
+| HR | Kroatien | LV | Lettland |
+| CY | Zypern | LT | Litauen |
+| CZ | Tschechien | LU | Luxemburg |
+| DK | Dänemark | NL | Niederlande |
+| EE | Estland | PL | Polen |
+| FI | Finnland | PT | Portugal |
+| FR | Frankreich | RO | Rumänien |
+| DE | Deutschland | SK | Slowakei |
+| GR | Griechenland | SI | Slowenien |
+| ES | Spanien | SE | Schweden |
 
 > **Hinweis:** GB (Vereinigtes Königreich), CH (Schweiz) und NO (Norwegen) sind keine EU-Mitglieder.
 

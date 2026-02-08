@@ -24,7 +24,7 @@ readonly SCRIPT_NAME="$(basename "$0")"
 readonly LOG_TAG="cachyos-rate-mirrors-eu"
 
 # EU-Mitgliedstaaten (ISO 3166-1 alpha-2) - Stand 2024
-readonly EU_COUNTRIES="AT,BE,BG,HR,CY,CZ,DK,EE,FI,FR,DE,GR,HU,IE,IT,LV,LT,LU,MT,NL,PL,PT,RO,SK,SI,ES,SE"
+readonly EU_COUNTRIES="AT,BE,BG,HR,CY,CZ,DK,EE,FI,FR,DE,GR,HU,IE,IT,LV,LT,LU,NL,PL,PT,RO,SK,SI,ES,SE"
 
 # Nicht-EU-Länder die häufig Mirrors haben (werden ausgeschlossen)
 readonly NON_EU_COUNTRIES="US,CN,RU,BY,JP,KR,AU,BR,CA,IN,SG,TW,HK,UA,CH,NO,GB,IS,RS,MD,AL,MK,ME,BA,XK,TR,NZ,ZA,AR,CL,MX,ID,TH,VN,PH,MY"
