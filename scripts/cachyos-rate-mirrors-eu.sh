@@ -26,8 +26,8 @@ readonly LOG_TAG="cachyos-rate-mirrors-eu"
 # EU-Mitgliedstaaten (ISO 3166-1 alpha-2) - Stand 2024
 readonly EU_COUNTRIES="AT,BE,BG,HR,CY,CZ,DK,EE,FI,FR,DE,GR,HU,IE,IT,LV,LT,LU,NL,PL,PT,RO,SK,SI,ES,SE"
 
-# Nicht-EU-Länder die häufig Mirrors haben (werden ausgeschlossen)
-readonly NON_EU_COUNTRIES="US,CN,RU,BY,JP,KR,AU,BR,CA,IN,SG,TW,HK,UA,CH,NO,GB,IS,RS,MD,AL,MK,ME,BA,XK,TR,NZ,ZA,AR,CL,MX,ID,TH,VN,PH,MY"
+# Nicht-EU-Länder (für Referenz, wird nicht mehr verwendet)
+# readonly NON_EU_COUNTRIES="US,CN,RU,BY,JP,KR,AU,BR,CA,IN,SG,TW,HK,UA,CH,NO,GB,IS,RS,MD,AL,MK,ME,BA,XK,TR,NZ,ZA,AR,CL,MX,ID,TH,VN,PH,MY"
 
 # Rate-mirrors Einstellungen
 export RATE_MIRRORS_PROTOCOL="${RATE_MIRRORS_PROTOCOL:-https}"
@@ -175,7 +175,7 @@ rate_repository_mirrors() {
     
     info "Bewerte Mirrors für %s Repository..." "$repo"
     info "Zieldatei: %s" "$mirror_file"
-    info "Ausgeschlossene Länder: %s" "$NON_EU_COUNTRIES"
+    info "Erlaubte EU-Länder: %s" "$EU_COUNTRIES"
     
     # Prüfe ob Zieldatei existiert
     if [[ ! -f "$mirror_file" ]]; then
@@ -187,11 +187,11 @@ rate_repository_mirrors() {
     # Erstelle temporäre Datei
     TMPFILE="$(mktemp)"
     
-    # Führe rate-mirrors aus mit EU-Filter
+    # Führe rate-mirrors aus mit EU-Filter (nur EU-Länder einschließen)
     if rate-mirrors \
         --save="$TMPFILE" \
         --entry-country="${RATE_MIRRORS_ENTRY_COUNTRY}" \
-        --exclude-countries="${NON_EU_COUNTRIES}" \
+        --include-countries="${EU_COUNTRIES}" \
         --allow-root \
         "$repo"; then
         
